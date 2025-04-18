@@ -252,9 +252,7 @@ function addNewDefaultEvent(id=null) {
     parent.insertBefore(eventContainer, addEventBtn);
     // updateProbabilityLabels();
 
-    if(tutorialState <= 3 && tutorialState > 0){
-        selectBtn.style.display = 'none';
-    }
+
 }
 
 function deleteEvent(eventBase){
