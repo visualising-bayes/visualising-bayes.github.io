@@ -49,11 +49,16 @@
                 <p class="stage-5">So if someone is healthy, this is the probability that the test correctly returns a negative result.</p>
 
                 <!-- Stage 6 -->
-                 <h1 class="stage-6">What Do We Want to Know❓</h1>
-                 <p class="stage-6">Our real question is:</p>
-                 <p class="stage-6"><i>If someone tests positive (or negative), what is the chance they actually have (or don't have) the disease?</i></p>
-                 <p class="stage-6">This is where <span style="color: #eee;">Bayes' Theorem</span> comes in...</p>
-
+                 <h1 class="stage-6 stage-99">What Do We Want to Know❓</h1>
+                 <p class="stage-6 stage-99">Our real question is:</p>
+                 <p class="stage-6 stage-99"><i>If someone tests positive (or negative), what is the chance they actually have (or don't have) the disease?</i> — <span style="color: white;">P(<span class="disease-text ">Disease</span> | <span class="positive-symbol  "> + </span>)</span</p>
+                 <p class="stage-6 stage-99">This is where <span style="color: #eee;">Bayes' Theorem</span> comes in...</p>
+                 <h4 class="stage-99" style="margin-top: 20px;">Note: Avoid this common mistake</h4>
+                 <p class="stage-99">We already know the probability of a positive test given that the person has the disease, this is:</p>
+                <p class="stage-99 example-formulae hover-sensitivity">P( <span class="positive-symbol mr ml"> + </span> | <span class="disease-text ml">Disease</span>) = <span class="num-true-pos positive-text ml"></span> / <span class="num-disease disease-text"></span></p>
+                 <p class="stage-99">This is NOT the same as the probability of someone having the disease given a positive test. We need to calculate this. Hover over the probabilities to visualise.</p>
+                <p class="stage-99 example-formulae hover-posterior">P(<span class="disease-text mr">Disease</span> | <span class="positive-symbol mr ml"> + </span>) = <span class="num-true-pos disease-text ml"></span> / <span class="num-positive positive-text"></span></p>
+                 <!-- <p class="stage-99">These two probabilities are often confused. Hover over each to visualise.</p> -->
                 <!-- Stage 7,8 -->
                  <h1 class="stage-7 stage-8">Bayes' Theorem📝</h1>
                 <p class="stage-7 stage-8">Bayes’ Theorem shows us how to <span style="color: #eee;">update the probability of an event</span> — in this case, having (or not having) the disease — <span style="color: #eee;">given some new evidence</span>, such as a positive or negative test result.</p>
@@ -127,7 +132,7 @@
                     <input type="text" id="p-negative-input" class="enter-answer-input">
                     <button class="submit-answer-btn control-btn" id="submit-p-negative-answer">Check</button>
                 </div>
-                <p class="stage-13">Need a <u id="hint-btn-p-negative" style="cursor: pointer;">hint</u>?</p>
+                <p class="stage-13">Need a <u id="hint-btn-p-negative" style="cursor: pointer;">hint</u>? Or <u id="reveal-btn-p-negative">reveal answer.</u></p>
                 
 
                 <!-- Stage 14 -->
@@ -158,6 +163,8 @@
                     <input type="text" id="bayes-negative-input" class="enter-answer-input">
                     <button class="submit-answer-btn control-btn" id="submit-bayes-negative-answer">Check</button>
                 </div>
+                <p class="stage-14">Given up? <u id="reveal-btn-bayes-negative">Reveal answer</u>.</p>
+
 
                 <!-- Stage 15 (END 1) -->
                  <h1 class="stage-15 stage-21">Done!🎉</h1>
@@ -218,7 +225,7 @@
                     <input type="text" id="p-positive-input" class="enter-answer-input">
                     <button class="submit-answer-btn control-btn" id="submit-p-positive-answer">Check</button>
                 </div>
-                <p class="stage-19">Need a <u id="hint-btn-p-positive" style="cursor: pointer;">hint</u>?</p>
+                <p class="stage-19">Need a <u id="hint-btn-p-positive" style="cursor: pointer;">hint</u>? Or <u id="reveal-btn-p-positive">reveal answer.</u></p>
                 
 
                 <!-- Stage 20 (14) -->
@@ -249,6 +256,8 @@
                     <input type="text" id="bayes-positive-input" class="enter-answer-input">
                     <button class="submit-answer-btn control-btn" id="submit-bayes-positive-answer">Check</button>
                 </div>
+                <p class="stage-20" >Given up? <u id="reveal-btn-bayes-positive">Reveal answer</u>.</p>
+
 
                 <div id="stage-button-container">
                     <button id="previous-stage" class="control-btn"><i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i>Back</button>
@@ -271,59 +280,3 @@
     
 </body>
 </html>
-
-<!-- 
-1. Welcome to the Island
-Welcome to an imiginary island inhabited by a small population of 64 individuals.
-Each person is represented by a grey circle in this grid.
-
-2. The Outbreak
-Oh no! A mysterious disease has broken out on the island.
-We know that X people have been infected. These individuals are shown in green.
-This gives us the prior probability of having the disease:
-P(Disease) = X / 64
-
-3. A Test is Developed
-Fortunately, a diagnostic test has been developed quickly.
-But like most tests, it's not perfectly accurate...
-
-4. Test Sensititvity
-The sensitivity (or true positive rate) of the test is A/X - this means that:
-P(Positive | Disease) = A/X (~p%)
-In other words, if someone has the disease, this is the chance the test correctly identifies them as positive.
-
-5. Test Specificity
-The specificity (true negative rate) of the test is b/Y (~y%) - this means that:
-P(Negative | No Disease)
-So if someone is healthy, this is the probability that the test correctly returns a negative result.
-
-6. What Do We Want to Know?
-Our real question is: 
-If someone tests positive (or negative), what is the chance they actually have (or don't have) the disease?#
-This is where Bayes' Theorem helps.
-
-7. Introduce Bayes' theorem.... what it does... P(Disease | Positive)... P(No Disease | Negative)
-
-8. Lets try it. Click on any individual to select them for testing.
-
-IF POSITIVE:
-
-9. Uh oh! This person teste positive.
-Using Bayes' Theorem, we want to calculate the probability that this person actually has the disease.
-
-10. To use Bayes' theorem, we first need to know the overall probability of a positive test.
-This can be calculated using what we know about the test:
-
-P(positive) = P(+|Disease)*P(Disease) + P(+|No Disease)*P(No Diease)
-...
-Enter answer...
-
-11. Correct. Now you are ready to calculate the probability that this individual has the disease using Bayes' theorem
-show formula
-
-Enter answer
-
-
-... 
-CORRECT/INCORRECT
--->
