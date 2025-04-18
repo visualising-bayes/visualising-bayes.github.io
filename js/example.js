@@ -69,13 +69,29 @@ function drawExampleGrid(){
 }
 
 document.getElementById('next-stage').addEventListener('click', function(){
-    stage += 1;
+    if(stage==6){
+        stage = 99;
+    }
+    else if(stage==99){
+        stage = 7;
+    }
+    else{
+        stage += 1;
+    }
     updateStage(stage);
+
+    
 })
 
 document.getElementById('previous-stage').addEventListener('click', function(){
     if(stage == 16){
         stage = 9;
+    }
+    else if(stage==7){
+        stage=99;
+    }
+    else if(stage==99){
+        stage=6;
     }
     else{
         stage -= 1;
@@ -87,7 +103,10 @@ function updateStage(n){
     console.log(`stage: ${n}`);
     showStageElements(n);
     let displayStage = n;
-    if(n > 15){
+    if(n == 99){
+        displayStage = 6;
+    }
+    else if(n > 15){
         displayStage -= 6;
     }
     document.getElementById('example-progress-number').innerText = `Progress: ${displayStage}/${totalStages}`;
@@ -633,6 +652,32 @@ document.querySelectorAll('.hover-sensitivity').forEach(element => {
         if(completed){
             clearFocus();
         }
+        else if(stage == 99){
+            clearFocus();
+        }
+        else{
+            hideEventsAndEvidence();
+            clearFocus();
+            focusedObject.classList.remove('hide-evidence');
+        }
+        
+    });
+});
+
+document.querySelectorAll('.hover-posterior').forEach(element => {
+    element.addEventListener('mouseenter', () => {
+        showEventsAndEvidence();
+        // hideEvidence();
+        focusObjectsWithClass('positive-test');
+    });
+
+    element.addEventListener('mouseleave', () => {
+        if(completed){
+            clearFocus();
+        }
+        else if(stage == 99){
+            clearFocus();
+        }
         else{
             hideEventsAndEvidence();
             clearFocus();
@@ -684,3 +729,34 @@ document.querySelectorAll('.hover-marginal').forEach(element => {
     });
 });
 
+document.getElementById('reveal-btn-p-negative').addEventListener('click', ()=>{
+    const neg = document.querySelectorAll('.object.negative-test').length;
+    const all = document.querySelectorAll('.object').length;
+    const answer = `${neg}/${all}`;
+    document.getElementById('p-negative-input').value = answer;
+    document.getElementById('submit-p-negative-answer').click();
+});
+
+document.getElementById('reveal-btn-p-positive').addEventListener('click', ()=>{
+    const pos = document.querySelectorAll('.object.positive-test').length;
+    const all = document.querySelectorAll('.object').length;
+    const answer = `${pos}/${all}`;
+    document.getElementById('p-positive-input').value = answer;
+    document.getElementById('submit-p-positive-answer').click();
+});
+
+document.getElementById('reveal-btn-bayes-positive').addEventListener('click', ()=>{
+    const dis = document.querySelectorAll('.object.disease.positive-test').length;
+    const all = document.querySelectorAll('.object.positive-test').length;
+    const answer = `${dis}/${all}`;
+    document.getElementById('bayes-positive-input').value = answer;
+    document.getElementById('submit-bayes-positive-answer').click();
+});
+
+document.getElementById('reveal-btn-bayes-negative').addEventListener('click', ()=>{
+    const noDis = document.querySelectorAll('.object.no-disease.negative-test').length;
+    const all = document.querySelectorAll('.object.negative-test').length;
+    const answer = `${noDis}/${all}`;
+    document.getElementById('bayes-negative-input').value = answer;
+    document.getElementById('submit-bayes-negative-answer').click();
+});
