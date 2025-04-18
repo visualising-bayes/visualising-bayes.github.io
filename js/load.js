@@ -46,9 +46,7 @@ window.onload = async function () {
         loadStateSelect.value = 'saved_state_Medical Diagnosis';
     
     }
-    else if (urlParams.get('tutorial') === 'true'){
-        startTutorial();
-    }
+
     else{
         // toggleKey();
 
