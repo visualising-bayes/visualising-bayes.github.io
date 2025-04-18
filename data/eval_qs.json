@@ -1,0 +1,18 @@
+[
+    {
+        "question_type": "multiple_choice",
+        "question": "How familiar are you with Bayes' Theorem?",
+        "options": [
+            "<b>Not familiar</b> - I don't known much about probability or haven't encountered Bayes' Theorem before.",
+            "<b>A little familiar</b> - I understand basic probabilities, but not Bayes' Theorem specifically.",
+            "<b>Familiar</b> - I've seen or used Bayes' Theorem before, but I'm a bit rusty.",
+            "<b>Confident</b> - I understand Bayes' Theorem well and feel condifent using it in practise."
+        ],
+        "answer": ""
+    },
+    {
+        "question_type": "open_answer",
+        "question": "Any other comments or feedback?",
+        "answer": ""
+    }
+]

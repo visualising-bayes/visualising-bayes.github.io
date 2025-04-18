@@ -1,0 +1,181 @@
+#graphics-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+    background-color: var(--dark-grey-1);
+    top: 0;
+    left: 0;
+    user-select: none;
+    cursor: grab;
+}
+
+#origin {
+    position: absolute;
+    width: 1px;
+    aspect-ratio: 1;
+    border-radius: 999px;
+    top: 45%;
+    right: 45%;
+    transform: translate(-45%, -45%);
+    z-index: 1;
+}
+
+#objects-grid {
+    position: absolute;
+    display: grid;
+    z-index: 0;
+}
+
+.object {
+    height: 50px;
+    cursor: inherit;
+    aspect-ratio: 1;
+    background-color: grey;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: opacity ease .25s, background-color ease .25s, border ease .25s;
+}
+
+.object::before{
+  content: "";
+  position: absolute;
+  color: white;
+  font-size: 0px; 
+  font-weight: normal;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; 
+  transition: all ease .15s;
+}
+
+.sample-object, .sample-object-smaller{
+  height: 50px;
+  transform: scale(80%);
+  cursor: inherit;
+  aspect-ratio: 1;
+  background-color: var(--dark-grey-1);
+  border-radius: 50%;
+  box-sizing: border-box;
+  opacity: 1;
+}
+
+.sample-object-smaller{
+  transform: scale(50%);
+  margin: -8px;
+}
+
+.object.unfocus{
+    opacity: .2;
+}
+
+.object.hide-event{
+    background-color: rgb(80, 80, 80) !important;
+}
+
+.object.hide-evidence{
+  border: none;
+}
+
+
+.object.hide-evidence::before {
+  content: "";
+  position: absolute;
+  color: white;
+  font-size: 3em; 
+  font-weight: normal;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; 
+}
+
+
+  .question-overlay {
+    position: relative;
+  }
+  
+  .question-overlay::before {
+    content: "?";
+    position: absolute;
+    color: white;
+    font-size: 2em;
+    font-weight: normal;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .positive-overlay {
+    position: relative;
+  }
+  
+  .positive-overlay::before {
+    content: "+";
+    position: absolute;
+    color: white;
+    font-size: 3em; 
+    font-weight: normal;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .negative-overlay {
+    position: relative;
+  }
+  
+  .negative-overlay::before {
+    content: "-";
+    position: absolute;
+    color: white;
+    font-size: 3em; 
+    font-weight: normal;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; 
+  }
+  
+  .stripes-overlay {
+    background: repeating-linear-gradient(
+      45deg,  
+      red,          
+      red 5px,    
+      var(--event-2-color) 5px,
+      var(--event-2-color) 15px
+    );
+  }  
+
+svg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: block;
+    cursor: grab;
+    background-color: var(--dark-grey-1);
+}
+.node text {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: grab;
+    transition: transform ease .1s;
+}
+.node text:hover {
+    transform: scale(1.1);
+}
+.link {
+    fill: none;
+    stroke-width: 5px;
+}
+.link-label {
+    font-size: 21px;
+    font-family: Arial, Helvetica, sans-serif;
+}
