@@ -372,7 +372,7 @@ html,body{
     align-items: center;
 }
 
-.hover-prior, .hover-sensitivity, .hover-specificity, .hover-marginal{
+.hover-prior, .hover-sensitivity, .hover-specificity, .hover-marginal, .hover-posterior{
     transition: all ease .15s;
     transform-origin: left;
     cursor: pointer;
@@ -382,7 +382,7 @@ html,body{
 }
 
 
-.hover-prior:hover, .hover-sensitivity:hover, .hover-specificity:hover, .hover-marginal:hover{
+.hover-prior:hover, .hover-sensitivity:hover, .hover-specificity:hover, .hover-marginal:hover, .hover-posterior:hover{
     transform: scale(1.05);
 }
 
@@ -399,4 +399,8 @@ html,body{
     font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+}
+
+#reveal-btn-p-negative, #reveal-btn-p-positive, #reveal-btn-bayes-negative, #reveal-btn-bayes-positive{
+    cursor: pointer;
 }
