@@ -1,0 +1,49 @@
+#bf-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    column-gap: 24px;
+
+}
+
+#bf-container p{
+    font-size: 30px;
+    color: var(--light-grey);
+    opacity: .5;
+
+}
+
+#bf-fraction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 12px;
+}
+
+#bf-fraction-top, #bf-fraction-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 12px;
+}
+
+#bf-fraction-line{
+    height: 2px;
+    width: 100%;
+    background-color: var(--light-grey);
+    opacity: .5;
+}
+
+.bf-element{
+    cursor: pointer;
+    color: var(--light-grey);
+    opacity: 1 !important;
+    transition: all ease 0.1s;
+}
+
+.bf-element:hover{
+    transform: scale(1.1);
+}

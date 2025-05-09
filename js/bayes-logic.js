@@ -1,0 +1,1 @@
+let numObjects = inputNumObjects.value;

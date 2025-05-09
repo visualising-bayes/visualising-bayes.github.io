@@ -1,0 +1,406 @@
+html,body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#example-body{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    /* background-color: red; */
+    column-gap: 60px;
+}
+
+#example-main{
+    flex: 1.1;
+    /* background-color: purple; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+#return-to-visualiser{
+    background-color: transparent;
+    margin-right: auto;
+    margin-left: 10%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 16px;
+    opacity: .5;
+    transform-origin: left;
+    transition: all ease .15s;
+    margin-top: -10px;
+}
+
+#return-to-visualiser:hover{
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.example-stage{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-grey-2);
+    width: 80%;
+    border-radius: 6px;
+    padding: 48px;
+    box-sizing: border-box;
+    row-gap: 16px;
+    height: 720px;
+    position: relative;
+}
+
+.example-stage ul{
+    color: rgb(224, 224, 224) !important;
+    /* background-color: rgb(52, 52, 52); */
+    /* border-radius: 3px; */
+
+
+}
+
+#progress-bar-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
+    width: 100%;
+    background-color: var(--dark-grey-3); /* Unfilled/grey portion */
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    overflow: hidden;
+}
+
+#progress-bar-fill {
+    height: 100%;
+    background-color: var(--control-blue);
+    transition: width 0.3s ease;
+}
+
+
+
+.example-progress{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    margin-top: -0px;
+}
+
+.example-progress p{
+    font-weight: lighter;
+    color: rgb(158, 158, 158) !important;
+}
+
+
+.example-stage p{
+    color: rgb(181, 181, 181);
+}
+
+.example-formulae{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 16px 0;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(52, 52, 52);
+    color: rgb(208, 208, 208) !important;
+}
+
+.example-bayes-formula{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(52, 52, 52);
+    border-radius: 3px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-size: 18px;
+    column-gap: 12px;
+}
+
+.example-bayes-formula p{
+    color: #ddd;
+}
+
+
+.example-bayes-formula .posterior{
+}
+
+.example-bayes-formula .fraction{
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.example-bayes-formula .fraction .top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 8px;
+}
+
+.example-bayes-formula .fraction .line{
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #ddd;
+}
+
+.example-bayes-formula .fraction .marginal{
+    text-align: center;
+}
+
+
+.example-stage h3{
+    margin-top: 16px;
+    font-size: 16px;
+}
+
+#stage-button-container{
+    margin-top: auto;
+    margin-bottom: -16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    column-gap: 12px;
+
+}
+#next-stage{
+    font-size: 16px;
+    color: var(--control-blue);
+    font-weight: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    border: solid 2px var(--control-blue);
+    background-color: transparent;
+    transition: all ease .15s;
+    flex: 1;
+
+}
+
+#next-stage:hover{
+    background-color: var(--control-blue);
+    flex: 1.5;
+    color: white;
+}
+
+#previous-stage{
+    font-size: 16px;
+    color: grey;
+    font-weight: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    border: solid 2px grey;
+    background-color: transparent;
+    transition: all ease .15s;
+    flex: 1;
+}
+
+#previous-stage:hover{
+    flex: 1.5;
+    background-color: grey;
+    color: white;
+}
+
+#example-grid-container{
+    flex: 1;
+    /* background-color: teal; */
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#example-objects-grid {
+    display: grid;
+    z-index: 0;
+    /* background-color: green; */
+}
+
+.disease{
+    background-color: rgb(112, 146, 76);
+    border-radius: 50%;
+}
+
+.no-disease{
+    background-color: rgb(73, 73, 73);
+    border-radius: 50%;
+}
+
+.positive-test {
+    border: solid;
+    border-color: rgb(203, 42, 42);
+    border-width: 3px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.positive-test::before{
+    content: '+';
+    position: absolute;
+    color: rgb(203, 42, 42);
+    font-size: 42px; 
+    font-weight: normal;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -57%);
+    pointer-events: none; 
+    transition: all ease .15s;
+}
+
+.negative-test {
+    border: solid;
+    border-color: rgb(66, 112, 252);
+    border-width: 2px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.negative-test::before{
+    content: '-';
+    position: absolute;
+    color: rgb(66, 112, 252);
+    font-size: 48px; 
+    font-weight: normal;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -59%);
+    pointer-events: none; 
+    transition: all ease .15s;
+}
+
+.hover-highlight:hover{
+    transform: scale(1.05);
+    transition: all ease .1s;
+    filter: brightness(130%);
+}
+
+.negative-symbol{
+    color:rgb(66, 112, 252);
+    /* font-size: 26px; */
+    font-family: 'Courier New', Courier, monospace;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.negative-text{
+    color:rgb(66, 112, 252);
+    /* font-weight: bold; */
+}
+
+.positive-text{
+    color:rgb(203, 42, 42);
+    /* font-weight: bold; */
+}
+
+.positive-symbol{
+    color:rgb(203, 42, 42);
+}
+
+.disease-text{
+    color: rgb(112, 146, 76);
+    /* font-weight: bold; */
+}
+
+.no-disease-text{
+    color: #aaa;
+}
+
+
+.ml{
+    margin-left: 5px;
+}
+
+.mr{
+    margin-right: 5px;
+}
+
+.input-answer-container{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+    justify-content: start;
+    column-gap: 8px;
+    background-color: var(--dark-grey-3);
+    border-radius: 3px;
+    padding-left: 10px;
+}
+
+.input-answer-container p{
+    width: max-content;
+}
+
+.submit-answer-btn{
+    background-color: var(--control-blue);
+    height: 100%;
+    /* margin-left: -8px; */
+    border-radius: 0 3px 3px 0px;
+}
+
+.enter-answer-input{
+    margin-left: -2px;
+    border-radius: 0;
+    font-size: 15px;
+    /* padding: 0; */
+    max-width: 80px;
+    padding-left: 5px;
+    height: 14%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all ease .15s;
+
+}
+
+.enter-answer-input:focus{
+    outline: none;
+}
+
+.enter-answer-input:hover{
+    background-color: rgb(69, 69, 69);
+}
+
+#example-key{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.hover-prior, .hover-sensitivity, .hover-specificity, .hover-marginal, .hover-posterior{
+    transition: all ease .15s;
+    transform-origin: left;
+    cursor: pointer;
+}
+.hover-prior, .hover-sensitivity, .hover-specificity{
+    margin-bottom: 12px;
+}
+
+
+.hover-prior:hover, .hover-sensitivity:hover, .hover-specificity:hover, .hover-marginal:hover, .hover-posterior:hover{
+    transform: scale(1.05);
+}
+
+#try-again-demo{
+    background-color: var(--control-green);
+    color: white;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#back-to-visualiser{
+    background-color: var(--control-blue);
+    color: white;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+#reveal-btn-p-negative, #reveal-btn-p-positive, #reveal-btn-bayes-negative, #reveal-btn-bayes-positive{
+    cursor: pointer;
+}

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualising Bayes' Theorem</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/graphics.css">
+    <link rel="stylesheet" href="css/bayes.css">
+    <link rel="stylesheet" href="css/ui.css">
+<!--     <link rel="stylesheet" href="css/tutorial.css"> -->
+    <link rel="stylesheet" href="css/example.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="example-body">
+        <div id="example-main">
+            <button id="return-to-visualiser" class="control-btn" onclick="window.location.href = '/'"><i class="fa-solid fa-arrow-left"></i> Return to Visualiser</button>
+            <div class="example-stage">
+                <div id="progress-bar-track">
+                    <div id="progress-bar-fill" style="width: 10%;"></div>
+                </div>
+                <div class="example-progress">
+                    <p>Bayes' Theorem Demonstration</p>
+                    <p id="example-progress-number">Progress: 1/10</p>
+                </div>
+
+                <!-- Stage 1,2 -->
+                <h1 class="stage-1 stage-2">Welcome to the Island🏝️</h1>
+                <p class="stage-1 stage-2">(Note: If any content does not fit properly on your screen, you can adjust the display size by pressing <b>CTRL +</b> to zoom in or <b>CTRL -</b> to zoom out)</p>
+                <p class="stage-1 stage-2">Weclome to an imaginary island inhabited by a small population of <span class="total-num"></span> healthy individuals.</p>
+                <p class="stage-1 stage-2">Each individual is represented by a grey circle in this grid.</p>
+                <h3 class="stage-2">An Outbreak!🦠</h3>
+                <p class="stage-2">Oh no! A mysterious disease has broken out on the island.</p>
+                <p class="stage-2">We know that the disease has infected about <span class="num-disease"></span> in 64 individuals. These individuals are shown in <span style="color:rgb(114, 155, 89); font-weight: bold; ">green</span>.</p>
+                <p class="stage-2">This gives us the prior probability of having the disease:</p>
+                <p class="stage-2 example-formulae">P(<span style="color:rgb(114, 155, 89)">Disease</span>) = <span class="num-disease disease-text ml "></span> / <span class="total-num mr"></span></p>
+                
+                <!-- Stage 3,4,5 -->
+                <h1 class="stage-3 stage-4 stage-5">A Test is Developed🧪</h1>
+                <div id="example-key" class="stage-3 stage-4 stage-5"><div class="sample-object-smaller positive-test"></div><p>= Positive, </p><div class="sample-object-smaller negative-test"></div><p> = Negative</p></div>
+                <p class="stage-3 stage-4 stage-5">Fortunately, a diagnostic test has been developed. But like most tests, it is not perfectly accurate...</p>
+                <h3 class="stage-4 stage-5">Test Sensititvity🤢</h3>
+                <p class="stage-4">The sensitivity (or true positive rate) of the test is <span class="num-true-pos"></span>/<span class="num-disease"></span> — this means that:</p>
+                <p class="stage-4 stage-5 example-formulae">P( <span class="positive-text ml mr">+</span> | <span class="disease-text ml">Disease</span>) = <span class="num-true-pos positive-text ml "></span> / <span class="num-disease disease-text mr"></span></p>
+                <p class="stage-4">In other words, if someone has the disease, this is the chance the test correctly identifies them as positive.</p>
+                <h3 class="stage-5">Test Specificity😄</h3>
+                <p class="stage-5">The specificity (or true negative rate) of the test is <span class="num-true-neg"></span>/<span class="num-no-disease"></span> — this means that:</p>
+                <p class="stage-5 example-formulae">P(<span class="negative-symbol ml mr">-</span>|<span class="no-disease-text ml">No Disease</span>) = <span class="num-true-neg negative-text ml "></span> / <span class="num-no-disease no-disease-text mr"></span></p>
+                <p class="stage-5">So if someone is healthy, this is the probability that the test correctly returns a negative result.</p>
+
+                <!-- Stage 6 -->
+                 <h1 class="stage-6 stage-99">What Do We Want to Know❓</h1>
+                 <p class="stage-6 stage-99">Our real question is:</p>
+                 <p class="stage-6 stage-99"><i>If someone tests positive (or negative), what is the chance they actually have (or don't have) the disease?</i> — <span style="color: white;">P(<span class="disease-text ">Disease</span> | <span class="positive-symbol  "> + </span>)</span</p>
+                 <p class="stage-6 stage-99">This is where <span style="color: #eee;">Bayes' Theorem</span> comes in...</p>
+                 <h4 class="stage-99" style="margin-top: 20px;">Note: Avoid this common mistake</h4>
+                 <p class="stage-99">We already know the probability of a positive test given that the person has the disease, this is:</p>
+                <p class="stage-99 example-formulae hover-sensitivity">P( <span class="positive-symbol mr ml"> + </span> | <span class="disease-text ml">Disease</span>)</p>
+                 <p class="stage-99">This is NOT the same as the probability of someone having the disease given a positive test. We need to calculate this. Hover over the probabilities to visualise.</p>
+                <p class="stage-99 example-formulae hover-posterior">P(<span class="disease-text mr">Disease</span> | <span class="positive-symbol mr ml"> + </span>)</p>
+                 <!-- <p class="stage-99">These two probabilities are often confused. Hover over each to visualise.</p> -->
+                <!-- Stage 7,8 -->
+                 <h1 class="stage-7 stage-8">Bayes' Theorem📝</h1>
+                <p class="stage-7 stage-8">Bayes’ Theorem shows us how to <span style="color: #eee;">update the probability of an event</span> — in this case, having (or not having) the disease — <span style="color: #eee;">given some new evidence</span>, such as a positive or negative test result.</p>
+                <p class="stage-8">The formula used to calculate this is:</p>
+                <div class="stage-8 example-bayes-formula">
+                    <p class="posterior">P(A|B)</p>
+                    <p>=</p>
+                    <div class="fraction">
+                        <div class="top">
+                            <p class="likelihood">P(B|A)</p>
+                            <p>&times</p>
+                            <p class="prior">P(A)</p>
+                        </div>
+                        <div class="line"></div>
+                        <p class="marginal">P(B)</p>
+                    </div>
+                </div>
+                <p class="stage-8">Let's try it out...</p>
+
+                <!-- Stage 9 -->
+                <h1 class="stage-9 stage-10">Evidence🔎</h1>
+                 <p class="stage-9">Click on any of the individuals to select them for testing.</p>
+
+                 <!-- Stage 10 -->
+                <p class="stage-10">Phew! A <span class="negative-text">negative</span> test result.</p>
+                <p class="stage-10"> We can now use Bayes' Theorem to calculate the probability that they definitely don't have the disease given this result: <span style="color:#eee">P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</span>.</p>
+                <!-- <p class="stage-10">i.e. P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</p> -->
+
+                <!-- Stage 11 -->
+                <h1 class="stage-11 stage-12">Bayes' Theorem📝</h1>
+                <div class="stage-11 stage-12 example-bayes-formula">
+                    <p class="posterior">P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</p>
+                    <p>=</p>
+                    <div class="fraction">
+                        <div class="top">
+                            <p class="likelihood">P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>)</p>
+                            <p>&times</p>
+                            <p class="prior">P(<span class="no-disease-text">No Disease</span>)</p>
+                        </div>
+                        <div class="line"></div>
+                        <p class="marginal">P( <span class="negative-symbol">-</span> )</p>
+                    </div>
+                </div>
+
+                <h3 class="stage-11">What Do We Already Know?</h3>
+                <p class="stage-11">✅ The prior probability of not having the disease:</p>
+                <p class="stage-11 example-formulae hover-prior">P(<span class="no-disease-text">No Disease</span>) = 1 - P(<span class="disease-text">Disease</span>) = <span class="num-no-disease no-disease-text ml"></span> / <span class="total-num"></span></p>
+                <p class="stage-11">✅ The test specificity:</p>
+                <p class="stage-11 example-formulae hover-specificity">P( <span class="negative-symbol mr ml"> - </span> | <span class="no-disease-text ml">No Disease</span>) = <span class="num-true-neg negative-text ml"></span> / <span class="num-no-disease no-disease-text"></span></p>
+                <p class="stage-11">There's just one component missing...</p>
+
+                <!-- Stage 12 -->   
+                <h3 class="stage-12">What Do We Need To Find?🔎</h3>
+                <p class="stage-12">There's one thing missing. To use Bayes' formula, we first need to know the probability of a <span class="negative-text">negative</span> test occuring under all possible scenarios, P(<span class="negative-symbol">-</span>).</p>
+                <p class="stage-12">This can be calculated using the <span style="color: #eee;">Law of Total Probability</span>...</p>
+
+                <!-- Stage 13 -->
+                 <h1 class="stage-13">Calculating P(<span class="negative-symbol">-</span>)🤔</h1>
+                 <p class="stage-13">The Law of Total Probability:</p>
+                 <p class="stage-13 example-formulae">P(<span class="negative-symbol">-</span>) = P(<span class="negative-symbol ml mr">-</span>|<span class="disease-text ml">Disease</span>) &times P(<span class="disease-text">Disease</span>) + P(<span class="negative-symbol ml mr">-</span>|<span class="no-disease-text ml">No Disease</span>) &times P(<span class="no-disease-text">No Disease</span>)</p>
+                <p class="stage-13">We have everything we need to calculate this (hover over each item below to visualise):</p>
+                <ul class="stage-13">
+                    <li class="hover-prior"><span style="color:rgb(158, 158, 158) !important;">Prior probability:</span> P(<span class="disease-text">Disease</span>) = <span class="num-disease"></span>/<span class="total-num"></span></li>
+                    <li class="hover-sensitivity"><span style="color:rgb(158, 158, 158) !important;">Test sensitivity:</span> P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>) = <span class="num-true-pos"></span>/<span class="num-disease"></span></li>
+                    <li class="hover-specificity"><span style="color:rgb(158, 158, 158) !important;">Test specificity:</span> P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>) = <span class="num-true-neg"></span>/<span class="num-no-disease"></span></li>
+                </ul>
+                <p class="stage-13">Using the Law of Total Probability, have a go at calculating P(<span class="negative-symbol">-</span>). Enter you answer below as a fraction, e.g. <i>'1/2'</i>, or decimal, e.g. <i>'0.5'</i>:</p>
+                <div class="stage-13 input-answer-container" id="p-negative-answer-container">
+                    <p>P(<span class="negative-symbol">-</span>)</p>
+                    <p>=</p>
+                    <input type="text" id="p-negative-input" class="enter-answer-input">
+                    <button class="submit-answer-btn control-btn" id="submit-p-negative-answer">Check</button>
+                </div>
+                <p class="stage-13">Need a <u id="hint-btn-p-negative" style="cursor: pointer;">hint</u>? Or <u id="reveal-btn-p-negative">reveal answer.</u></p>
+                
+
+                <!-- Stage 14 -->
+                <h1 class="stage-14">Bayes' Theorem📝</h1>
+                <p class="stage-14">Now use Bayes' Theorem to calculate the probability that the individual does not have the disease given the negative test result.</p>
+                <div class="stage-14 example-bayes-formula">
+                    <p class="posterior">P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</p>
+                    <p>=</p>
+                    <div class="fraction">
+                        <div class="top">
+                            <p class="likelihood">P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>)</p>
+                            <p>&times</p>
+                            <p class="prior">P(<span class="no-disease-text">No Disease</span>)</p>
+                        </div>
+                        <div class="line"></div>
+                        <p class="marginal">P( <span class="negative-symbol">-</span> )</p>
+                    </div>
+                </div>
+                <ul class="stage-14">
+                    <li class="hover-prior"><span style="color:rgb(158, 158, 158) !important;">Prior probability:</span> P(<span class="disease-text">Disease</span>) = <span class="num-disease"></span>/<span class="total-num"></span></li>
+                    <li class="hover-sensitivity"><span style="color:rgb(158, 158, 158) !important;">Test sensitivity:</span> P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>) = <span class="num-true-pos"></span>/<span class="num-disease"></span></li>
+                    <li class="hover-specificity"><span style="color:rgb(158, 158, 158) !important;">Test specificity:</span> P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>) = <span class="num-true-neg"></span>/<span class="num-no-disease"></span></li>
+                    <li class="hover-marginal">P(<span class="negative-symbol">-</span>) = <span class="num-negative"></span>/<span class="total-num"></span></li>
+                </ul>
+                <div class="stage-14 input-answer-container" id="bayes-negative-answer-container">
+                    <p>P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</p>
+                    <p>=</p>
+                    <input type="text" id="bayes-negative-input" class="enter-answer-input">
+                    <button class="submit-answer-btn control-btn" id="submit-bayes-negative-answer">Check</button>
+                </div>
+                <p class="stage-14">Given up? <u id="reveal-btn-bayes-negative">Reveal answer</u>.</p>
+
+
+                <!-- Stage 15 (END 1) -->
+                 <h1 class="stage-15 stage-21">Done!🎉</h1>
+                 <p class="stage-15 stage-21">Hopefully you now have a better understanding of Bayes' Theorem and how it can be applied to a real-world problem.</p>
+                 <p class="stage-15 stage-21">Feel free to go back over the previous steps to clarify your understanding. Alternately, click below to try this demo again with different values.</p>
+                 <button class="stage-15 stage-21 control-btn" id="try-again-demo" onclick="window.location.href = 'example.html';"><i class="fa-solid fa-rotate-left"></i> Try Again</button>
+                 <p class="stage-15 stage-21">When you're ready, return to the visualiser to experiment and test your understanding.</p>
+                 <button class="stage-15 stage-21 control-btn" id="back-to-visualiser" onclick="window.location.href = '/'"><i class="fa-solid fa-home"></i> Back To Visualiser</button>
+
+                <!-- Stage 16 (10) -->
+                <h1 class="stage-16">Evidence🔎</h1>
+                <p class="stage-16">Uh oh! A <span class="positive-text">positive</span> test result.</p>
+                <p class="stage-16"> We can now use Bayes' Theorem to calculate the probability that they actually do have the disease given this result: <span style="color:#eee">P(<span class="disease-text">Disease</span> | <span class="positive-symbol">+</span> )</span>.</p>
+                <!-- <p class="stage-10">i.e. P(<span class="no-disease-text">No Disease</span> | <span class="negative-symbol">-</span> )</p> -->
+
+                <!-- Stage 17 (11) -->
+                <h1 class="stage-17 stage-18">Bayes' Theorem📝</h1>
+                <div class="stage-17 stage-18 example-bayes-formula">
+                    <p class="posterior">P(<span class="disease-text">Disease</span> | <span class="positive-symbol">+</span> )</p>
+                    <p>=</p>
+                    <div class="fraction">
+                        <div class="top">
+                            <p class="likelihood">P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>)</p>
+                            <p>&times</p>
+                            <p class="prior">P(<span class="disease-text">Disease</span>)</p>
+                        </div>
+                        <div class="line"></div>
+                        <p class="marginal">P( <span class="positive-symbol">+</span> )</p>
+                    </div>
+                </div>
+
+                <h3 class="stage-17">What Do We Already Know?</h3>
+                <p class="stage-17 ">✅ The prior probability of having the disease:</p>
+                <p class="stage-17 example-formulae hover-prior">P(<span class="disease-text">Disease</span>) = <span class="num-disease disease-text ml"></span> / <span class="total-num"></span></p>
+                <p class="stage-17">✅ The test sensitivity:</p>
+                <p class="stage-17 example-formulae hover-sensitivity">P( <span class="positive-symbol mr ml"> + </span> | <span class="disease-text ml">Disease</span>) = <span class="num-true-pos positive-text ml"></span> / <span class="num-disease disease-text"></span></p>
+                <p class="stage-17">There's just one component missing...</p>
+
+                <!-- Stage 18 (12) -->   
+                <h3 class="stage-18">What Do We Need To Find?🔎</h3>
+                <p class="stage-18">There's one thing missing. To use Bayes' formula, we first need to know the probability of a <span class="positive-text">positive</span> test occuring under all possible scenarios, P(<span class="positive-symbol">+</span>).</p>
+                <p class="stage-18">This can be calculated using the <span style="color: #eee;">Law of Total Probability</span>...</p>
+
+                <!-- Stage 19 (13) -->
+                 <h1 class="stage-19">Calculating P(<span class="positive-symbol">+</span>)🤔</h1>
+                 <p class="stage-19">The Law of Total Probability:</p>
+                 <p class="stage-19 example-formulae">P(<span class="positive-symbol">+</span>) = P(<span class="positive-symbol ml mr">+</span>|<span class="disease-text ml">Disease</span>) &times P(<span class="disease-text">Disease</span>) + P(<span class="positive-symbol ml mr">+</span>|<span class="no-disease-text ml">No Disease</span>) &times P(<span class="no-disease-text">No Disease</span>)</p>
+                <p class="stage-19">We have everything we need to calculate this (hover over each item below to visualise):</p>
+                <ul class="stage-19">
+                    <li class="hover-prior"><span style="color:rgb(158, 158, 158) !important;">Prior probability:</span> P(<span class="disease-text">Disease</span>) = <span class="num-disease"></span>/<span class="total-num"></span></li>
+                    <li class="hover-sensitivity"><span style="color:rgb(158, 158, 158) !important;">Test sensitivity:</span> P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>) = <span class="num-true-pos"></span>/<span class="num-disease"></span></li>
+                    <li class="hover-specificity"><span style="color:rgb(158, 158, 158) !important;">Test specificity:</span> P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>) = <span class="num-true-neg"></span>/<span class="num-no-disease"></span></li>
+                </ul>
+                <p class="stage-19">Using the Law of Total Probability, have a go at calculating P(<span class="negative-symbol">-</span>). Enter you answer below as a fraction, e.g. <i>'1/2'</i>, or decimal, e.g. <i>'0.5'</i>:</p>
+                <div class="stage-19 input-answer-container" id="p-positive-answer-container">
+                    <p>P(<span class="positive-symbol">+</span>)</p>
+                    <p>=</p>
+                    <input type="text" id="p-positive-input" class="enter-answer-input">
+                    <button class="submit-answer-btn control-btn" id="submit-p-positive-answer">Check</button>
+                </div>
+                <p class="stage-19">Need a <u id="hint-btn-p-positive" style="cursor: pointer;">hint</u>? Or <u id="reveal-btn-p-positive">reveal answer.</u></p>
+                
+
+                <!-- Stage 20 (14) -->
+                <h1 class="stage-20">Bayes' Theorem📝</h1>
+                <p class="stage-20">Now use Bayes' Theorem to calculate the probability that the individual does have the disease given the positive test result.</p>
+                <div class="stage-20 example-bayes-formula">
+                    <p class="posterior">P(<span class="disease-text">Disease</span> | <span class="positive-symbol">+</span> )</p>
+                    <p>=</p>
+                    <div class="fraction">
+                        <div class="top">
+                            <p class="likelihood">P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>)</p>
+                            <p>&times</p>
+                            <p class="prior">P(<span class="disease-text">Disease</span>)</p>
+                        </div>
+                        <div class="line"></div>
+                        <p class="marginal">P( <span class="positive-symbol">+</span> )</p>
+                    </div>
+                </div>
+                <ul class="stage-20">
+                    <li class="hover-prior"><span style="color:rgb(158, 158, 158) !important;">Prior probability:</span> P(<span class="disease-text">Disease</span>) = <span class="num-disease"></span>/<span class="total-num"></span></li>
+                    <li class="hover-sensitivity"><span style="color:rgb(158, 158, 158) !important;">Test sensitivity:</span> P( <span class="positive-symbol">+</span> | <span class="disease-text">Disease</span>) = <span class="num-true-pos"></span>/<span class="num-disease"></span></li>
+                    <li class="hover-specificity"><span style="color:rgb(158, 158, 158) !important;">Test specificity:</span> P( <span class="negative-symbol">-</span> | <span class="no-disease-text">No Disease</span>) = <span class="num-true-neg"></span>/<span class="num-no-disease"></span></li>
+                    <li class="hover-marginal">P(<span class="positive-symbol">+</span>) = <span class="num-positive"></span>/<span class="total-num"></span></li>
+                </ul>
+                <div class="stage-20 input-answer-container" id="bayes-positive-answer-container">
+                    <p>P(<span class="disease-text">Disease</span> | <span class="positive-symbol">+</span> )</p>
+                    <p>=</p>
+                    <input type="text" id="bayes-positive-input" class="enter-answer-input">
+                    <button class="submit-answer-btn control-btn" id="submit-bayes-positive-answer">Check</button>
+                </div>
+                <p class="stage-20" >Given up? <u id="reveal-btn-bayes-positive">Reveal answer</u>.</p>
+
+
+                <div id="stage-button-container">
+                    <button id="previous-stage" class="control-btn"><i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i>Back</button>
+                    <button id="next-stage" class="control-btn">Next<i class="fa-solid fa-arrow-right" style="margin-left: 4px;"></i></button>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="example-grid-container">
+            <div id="example-objects-grid"></div>
+
+        </div>
+
+    </div>
+        
+    <!-- <script src="js/input.js"></script> -->
+    <!-- <script src="js/graphics.js"></script> -->
+    <script src="js/example.js"></script>
+    
+</body>
+</html>

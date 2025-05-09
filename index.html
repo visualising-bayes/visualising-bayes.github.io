@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualising Bayes' Theorem</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/graphics.css">
+    <link rel="stylesheet" href="css/bayes.css">
+    <link rel="stylesheet" href="css/ui.css">
+<!--     <link rel="stylesheet" href="css/tutorial.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+    <div id="tree-container"> 
+        <svg></svg>
+    </div>
+    
+
+    </div>
+    <div id="graphics-container">
+        <div id="origin"></div>
+        <div id="objects-grid"></div>
+    </div>
+    <div id="navbar">
+        <button class="navbar-btn active" id="navbar-intro"><span style="opacity: .5;"><i class="fa-solid fa-home"></i></span></button>
+        <button class="navbar-btn" id="navbar-setup"><span style="opacity: .5;">1.</span> Hypotheses</button>
+        <button class="navbar-btn" id="navbar-customise"><span style="opacity: .5;">2.</span> Evidence</button>
+        <button disabled class="navbar-btn blocked" id="navbar-bayes"><span style="opacity: .5;">3.</span> Bayes' Theorem</button>
+    </div>
+    <div class="controls-container" id="intro-container">
+        <button class="minimise-btn" onclick="minimiseWindow();"><i class="fa-solid fa-xmark"></i></button>
+        <div class="sub-controls-container">
+            <h2>Visualising Bayes' Theorem</h2>
+            <p class="h2-subtitle">Using Natural Frequencies</p>
+            <p class="info-text"> This project is designed to make learning and teaching Bayes' Theorem and conditional probability more intuitive and engaging, specifically though the use of natural frequencies (whole numbers).</p>
+            <p class="info-text"> Through a number of interactive, dynamic visualisations, users can explore how probabilities change with new information. You can create and simulate your own real-world scenarios, experiment with different probabilities, and instantly see how the results update.</p>
+            <!-- <h4>What is Bayes' Theorem?</h4> -->
+            <!-- <p class="info-text">Bayes' Theorem is a powerful tool in probability theory that helps us update our beliefs or predictions based on new evidence. It’s widely used in fields like medicine, law, machine learning and everyday decision-making.</p> -->
+            <!-- <p class="info-text">In simple terms, it answers questions like:<br><br> -->
+                <!-- <i>“Given some new evidence, how likely is a particular outcome now?”</i></p> -->
+            <h4 class="intro-subheading">How to Get Started</h4>
+            <p class="info-text">Select an preset below, or start from scratch (you can also load/save presets via the <i class="fa-solid fa-floppy-disk"></i> menu). Use the stages in the navigation bar above, or click below, to begin exploring.</p>
+            <select name="select-preset-intro" id="select-preset-intro"></select>
+            <button class="control-btn" id="start-btn" onclick="document.getElementById('navbar-setup').click();"><i class="fa-solid fa-play"></i> Start</button>
+            <h4 class="intro-subheading">A Bit Lost?</h4>
+            <p class="info-text">If you're new to Bayes' Theorem or would like a refresher, you can start with a guided step-by-step walkthrough:</p>
+            <button class="control-btn" id="walktrough-btn" onclick="window.location.href = 'example.html';"><i class="fa-solid fa-play"></i> Demonstration</button>
+
+        </div>
+    </div>
+    <div class="controls-container" id="events-controls-container">
+        <button class="minimise-btn" onclick="minimiseWindow();"><i class="fa-solid fa-xmark"></i></button>
+        
+        <div class="sub-controls-container">
+            <label for="input-num-objects" class="sample-size-label">Sample size</label>
+
+            <p class="info-text"> Here you can adjust the size of the sample/population. Each icon in the grid represents an individual in this sample.</p>
+          
+            <input type="number" name="input-num-objects" id="input-num-objects" value="0" min="0">
+        </div>
+
+        <div class="sub-controls-container" id="events-container">
+            <h2>Hypotheses</h2>
+            <!-- <p class="info-text"> These are <b>mutually exclusive</b> events. For example, a patient either has a disease or doesn't. The probability of each event is based on <b>prior knowledge</b> - i.e. intial beliefs/assumptions about a 'world' or 'population'.</p> -->
+            <p class="info-text"> Below you can create and customise a set of mutually exclusive events and assign a prior probability to each. For example, these may be "<i>Has Disease</i>" and "<i>Doesn't Have Disease</i>".</p>
+            <!-- <p class="info-text"> </p> -->
+            <label for="show-prior-probabilities-checkbox" class="show-probabilities-checkbox-label" style="display: none;">
+                <input checked  type="checkbox" name="show-prior-probabilities-checkbox" id="show-prior-probabilities-checkbox" class="show-probabilities-checkbox">
+                Show Probabilities
+            </label>
+            <button class="add-btn" id="add-event-btn"><i class="fa-solid fa-plus"></i> Add Event</button>
+        </div>
+    </div>
+    <div class="controls-container" id="evidence-controls-container">
+        <button class="minimise-btn" onclick="minimiseWindow();"><i class="fa-solid fa-xmark"></i></button>
+
+        <!-- <label for="input-num-objects">Sample size:</label> -->
+        <!-- <input type="number" name="input-num-objects-2" id="input-num-objects-2" value="0" min="0"> -->
+
+        <!-- <div class="sub-controls-container">
+            <label for="input-num-objects-2" class="sample-size-label">Sample size</label>
+
+            <p class="info-text"> Here you can adjust the size of the sample/population. Each icon in the grid represents an individual in this sample.</p>
+          
+            <input type="number" name="input-num-objects-2" id="input-num-objects-2" value="0" min="0">
+        </div> -->
+        <div class="sub-controls-container" id="evidence-container">
+            <h2>Evidence</h2>
+            <p class="info-text">These are also <u>mutually exclusive</u> events. These can be thought of as possible outcomes that would be <u>evidence</u> for one of the priors. For example, a positive or negative test result would evidence having/not having a disease.</p>
+            <label style="display: none;" for="show-evidence-probabilities-checkbox" class="show-probabilities-checkbox-label">
+                <input  type="checkbox" name="show-evidence-probabilities-checkbox" id="show-evidence-probabilities-checkbox" class="show-probabilities-checkbox">
+                Show Probabilities
+            </label>
+            <button class="add-btn" id="add-evidence-btn"><i class="fa-solid fa-plus"></i> Add Event</button>
+        </div>
+    </div>
+    <div class="controls-container" id="bayes-controls-container">
+        <button class="minimise-btn" onclick="minimiseWindow();"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="sub-controls-container">
+            <h2>Bayes' Theorem</h2>
+            <p class="info-text"> Bayes' Theorem describes how to update the probability of a <u>hypothesis</u> based on new <u>observed evidence</u></p>
+            <div id="bayes-controls" class="sub-control-container">
+                <div>
+                    <label for="hypothesis-dropdown" class="bayes-dropdown-label">Hypothesis, <span id="hypothesis-dropdown-A" style="font-weight: bold;">H</span>: </label>
+                    <select id="hypothesis-dropdown" name="hypothesis-dropdown" class="bayes-dropdown">
+                    </select>
+                </div>
+                <div>
+                    <label for="observed-dropdown" class="bayes-dropdown-label">Observed Evidence, <span id="observed-dropdown-B" style="font-weight: bold;">E</span>: </label>
+                    <select id="observed-dropdown" name="observed-dropdown" class="bayes-dropdown">
+                    </select>
+                </div>
+                <div>
+                    <input class="checkbox" type="checkbox" id="show-labels-checkbox" name="show-labels-checkbox">
+                    <label for="show-labels-checkbox" id="show-labels-checkbox-label">Show Event Labels</label>
+                </div>
+            </div>
+        </div>
+        
+        <div id="bf-container">
+            <p id="bf-posterior" class="bf-element">P(<span class="bf-event">A</span>|<span class="bf-evidence">B</span>)</p>
+            <p>=</p>
+            <div id="bf-fraction">
+                <div id="bf-fraction-top">
+                    <p id="bf-likelihood" class="bf-element">P(<span class="bf-evidence">B</span>|<span class="bf-event">A</span>)</p>
+                    <p>&times</p>
+                    <p id="bf-prior" class="bf-element">P(<span class="bf-event">A</span>)</p>
+                </div>
+                <div id="bf-fraction-line"></div>
+                <div id="bf-fraction-bottom">
+                    <p id="bf-marginal" class="bf-element">P(<span class="bf-evidence">B</span>)</p>
+                </div>
+            </div>
+        </div>
+        <div class="sub-control-container" id="hover-details-container">
+            <p id="hover-info-text"><b>Hover</b> over elements of the Bayes' Theorem formula to view details<br><br>or <b>Click</b> on elements for futher details in presentation view</p>
+            <p id="bayes-element-label"></p>
+            <p id="bayes-element-description"></p>
+            <p id="calculation-display"></p>
+        </div>
+    </div>
+    <div class="controls-container" id="presentation-view-container">
+        <button class="minimise-btn" onclick="minimiseWindow();"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div id="selection-mode-popup">
+        <h1><i class="fa-solid fa-hand-pointer"></i> You are in selection mode for <span id="selection-mode-label"></span></h1>
+        <p><span class="controls-text">Left-click</span> an object to select</p>
+        <p><span class="controls-text">Left-click + drag</span> to select multiple</p>
+        <p><span class="controls-text">ESC</span> to <button class="control-btn" style="background-color: var(--light-grey);color: var(--dark-grey-1);" onclick="exitSelectionMode();">Confirm</button></p>
+    </div>
+
+    <div id="options-container">
+        <label class="toggle-switch">
+            <p>Toggle View</p>
+            <input type="checkbox" id="toggle-view-switch">
+            <span class="slider">
+                <i class="fa-solid fa-grip grid-icon"></i>
+                <i class="fa-solid fa-share-nodes tree-icon"></i>
+            </span>
+        </label>
+        <button id="toggle-table-btn" class="option-btn" onclick="generateTwoWayTable()"><p>Two-Way Table</p><i class="fa-solid fa-table"></i></button>
+        <button id="toggle-key-btn" class="option-btn"><p>Show Key</p><i class="fa-solid fa-key"></i></button>
+        <button id="toggle-presets-btn" class="option-btn"><p>Save/Load</p><i class="fa-solid fa-floppy-disk"></i></button>
+        <button id="open-feedback-btn" class="option-btn"><p>Feedback</p><i class="fa-solid fa-star"></i></button>
+    </div>
+
+    <div id="welcome-container">
+        <div id="welcome-main">
+            <button class="close-btn" id="close-welcome-btn">✖</button>
+            <h1>Welcome!</h1>
+            <hr>
+            <p>Create your own visualisation from a blank canvas:</p>
+            <button class="control-btn" id="start-from-scratch-btn"><i class="fa-solid fa-pen-to-square"></i> Start From Scratch</button>
+            <hr>
+            <p>Or load a saved preset:</p>
+            <select name="" id="welcome-preset-select"></select>
+            <button class="control-btn" id="welcome-load-btn"><i class="fa-solid fa-play"></i> Load Preset</button>
+        </div>
+    </div>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/customise.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/bayes-logic.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/selection.js"></script>
+    <script src="js/evidence-config.js"></script>
+    <script src="js/event-config.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/tree.js"></script>
+<!--     <script src="js/tutorial.js"></script> -->
+    <script src="js/load.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</body>
+</html>

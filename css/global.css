@@ -1,0 +1,18 @@
+:root{
+    --object-colour-2: rgb(107, 143, 219);
+    --object-colour-1: rgb(110, 203, 105);
+    --evidence-colour-1: rgb(231, 68, 68);
+    --evidence-colour-2: rgba(255, 255, 255, 0.25);
+
+    --light-grey: #f1f1f1;
+    --dark-grey-1: #202020;
+    --dark-grey-2: #292929;
+    --dark-grey-3: #3d3d3d;
+
+    --main-text: #fff;
+
+    --control-blue: rgb(90, 105, 185);
+    --control-red: rgb(196, 73, 73);
+    --control-green: rgb(78, 155, 88);
+    --control-purple: rgb(133, 94, 170);
+}
